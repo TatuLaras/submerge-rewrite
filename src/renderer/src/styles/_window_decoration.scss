@@ -1,0 +1,11 @@
+.window-decoration {
+    background-color: lightgray;
+    display: flex;
+
+    .draggable {
+        -webkit-app-region: drag;
+        height: 100%;
+        flex: 1;
+    }
+    height: 1.5rem;
+}
