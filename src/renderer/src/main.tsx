@@ -11,13 +11,21 @@ import {
     createRoute,
     createRootRoute,
 } from '@tanstack/react-router';
+import LeftPanel from './partials/LeftPanel';
 
 const rootRoute = createRootRoute({
     component: () => (
-        <>
+        <div id='main-wrapper'>
             <WindowDecoration />
-            <Outlet />
-        </>
+            <div className='global-layout app-content'>
+                <div className='global-layout cols'>
+                    <LeftPanel />
+                    <div className='global-layout route-content'>
+                        <Outlet />
+                    </div>
+                </div>
+            </div>
+        </div>
     ),
 });
 
@@ -27,7 +35,9 @@ const indexRoute = createRoute({
     component: function Index() {
         return (
             <div className='p-2'>
-                <h3>Welcome Home!<Link to='/about'>About</Link></h3>
+                <h3>
+                    Welcome Home! <Link to='/about'>About</Link>
+                </h3>
             </div>
         );
     },
@@ -37,7 +47,11 @@ const aboutRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: '/about',
     component: function About() {
-        return <div className='p-2'>Hello from About! <Link to='/'>Home</Link></div>;
+        return (
+            <div className='p-2'>
+                Hello from About! <Link to='/'>Home</Link>
+            </div>
+        );
     },
 });
 

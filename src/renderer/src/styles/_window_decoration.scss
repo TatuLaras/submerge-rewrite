@@ -1,11 +1,36 @@
+@use 'helpers';
+
 .window-decoration {
-    background-color: lightgray;
+    background-color: var(--color-bg-light);
     display: flex;
+    align-items: stretch;
+    height: 1.8rem;
 
     .draggable {
         -webkit-app-region: drag;
         height: 100%;
         flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .title {
+            margin-left: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text-disabled);
+        }
     }
-    height: 1.5rem;
+
+    button {
+        @include helpers.glow(1px);
+        @include helpers.hoverGlow(4px);
+        background-color: #00000000;
+        border: none;
+        color: var(--color-text);
+        font-size: 0.8rem;
+        height: 100%;
+        padding: 0.1rem 0.5rem 0 0.5rem;
+        margin-right: 0.4rem;
+        cursor: pointer;
+
+    }
 }

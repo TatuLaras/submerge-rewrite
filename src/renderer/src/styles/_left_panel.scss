@@ -1,0 +1,50 @@
+@use 'helpers';
+
+#left-panel {
+    width: 10rem;
+    min-width: 4rem;
+    max-width: 30rem;
+    width: 15rem;
+    resize: horizontal;
+    overflow: auto;
+    padding: 0.5rem;
+    container: leftpanel / inline-size;
+    display: flex;
+    flex-direction: column;
+    .navigation {
+        .menu-item {
+            @include helpers.glow(1px);
+            padding: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--color-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            @include helpers.hoverGlow(3px);
+            .icon {
+                font-size: 1.5rem;
+            }
+            .text {
+                padding-left: 1.5rem;
+            }
+        }
+    }
+}
+
+@container leftpanel (width < 13rem) {
+    .menu-item {
+        justify-content: center;
+        .text {
+            display: none;
+        }
+    }
+
+    #immersion-time-panel {
+        display: none !important;
+    }
+
+    #immersion-time-panel-placeholder {
+        display: flex !important;
+    }
+}

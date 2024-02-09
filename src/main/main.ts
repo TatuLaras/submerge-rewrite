@@ -1,22 +1,16 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import * as path from 'path';
 
-let mainWindow;
-
-async function handleFileOpen() {
-    const { canceled, filePaths } = await dialog.showOpenDialog({});
-    if (!canceled) {
-        return filePaths[0];
-    }
-}
+let mainWindow: BrowserWindow | null = null;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
         frame: false,
         webPreferences: {
             preload: path.join(__dirname, '../preload/preload.js'),
-            webSecurity: false,
         },
+        minHeight: 600,
+        minWidth: 800,
     });
 
     // Vite DEV server URL
@@ -25,7 +19,6 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    ipcMain.handle('dialog:openFile', handleFileOpen);
     createWindow();
 });
 
@@ -39,8 +32,17 @@ app.on('activate', () => {
     }
 });
 
+
 ipcMain.on('close', () => {
     closeApp();
+});
+
+ipcMain.on('minimize', () => {
+    mainWindow?.minimize();
+});
+
+ipcMain.on('maximize', () => {
+    mainWindow?.isMaximized() ? mainWindow?.unmaximize() : mainWindow?.maximize();
 });
 
 function closeApp() {

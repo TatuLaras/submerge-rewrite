@@ -1,0 +1,38 @@
+@use 'helpers';
+
+#immersion-time-panel {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .capsule-select {
+        margin-top: 2rem;
+        margin-right: 0.3rem;
+        align-self: center;
+    }
+
+    .clock {
+        margin-top: 2rem;
+        width: calc(100% - 1rem);
+        align-self: center;
+    }
+
+    .commit-btn {
+        margin-top: 2rem;
+        align-self: flex-end;
+    }
+}
+
+#immersion-time-panel-placeholder {
+    display: none;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    cursor: pointer;
+    @include helpers.hoverGlow(3px);
+}

@@ -1,0 +1,14 @@
+@mixin glow($strength) {
+    text-shadow: 0 0 #{$strength} var(--color-text);
+}
+
+@mixin elementGlow($strength) {
+    box-shadow: 0 0 #{$strength} var(--color-text);
+}
+
+@mixin hoverGlow($strength) {
+    transition: text-shadow 0.05s ease-out;
+    &:hover {
+        @include glow($strength);
+    }
+}

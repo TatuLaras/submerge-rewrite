@@ -1,0 +1,187 @@
+@use 'helpers';
+
+@font-face {
+    font-family: Inter;
+    src: url('assets/fonts/Inter.ttf');
+}
+
+$color-bg: hsl(197, 10%, 10%);
+$color-bg-light: hsl(197, 25%, 20%);
+$color-bg-lighter: hsl(197, 30%, 30%);
+$color-bg-x-light: hsl(197, 30%, 40%);
+$color-text: white;
+$color-text-disabled: hsl(197, 14%, 60%);
+$color-accent-1: #38a3a5ff;
+$color-accent-2: #f4d35eff;
+$color-accent-3: #ff6b35ff;
+$color-accent-4: #750d37ff;
+
+:root {
+    --color-bg: #{$color-bg};
+    --color-bg-light: #{$color-bg-light};
+    --color-bg-lighter: #{$color-bg-lighter};
+    --color-bg-x-light: #{$color-bg-x-light};
+    --color-text: #{$color-text};
+    --color-text-disabled: #{$color-text-disabled};
+    --color-accent-1: #{$color-accent-1};
+    --color-accent-2: #{$color-accent-2};
+    --color-accent-3: #{$color-accent-3};
+    --color-accent-4: #{$color-accent-4};
+    --scrollbar-width: 5px;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+button,
+input {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text-disabled);
+}
+
+a {
+    color: var(--color-accent-2);
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-width);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #00000000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-accent-1);
+    border-radius: 2px;
+}
+
+
+
+.global-layout {
+    &.cols {
+        display: flex;
+        height: 100%;
+    }
+
+    &.route-content {
+        flex: 1;
+        padding: 1rem;
+        user-select: text;
+    }
+
+    &.app-content {
+        flex: 1;
+        overflow: auto;
+    }
+}
+
+#main-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.panel {
+    background-color: var(--color-bg-light);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.panel-title {
+    @include helpers.glow(1px);
+    font-weight: 600;
+    align-self: flex-start;
+    color: var(--color-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    .icon {
+        font-size: 1.2rem;
+        padding-top: 0.1rem;
+    }
+    .text {
+        padding-left: 1rem;
+    }
+}
+
+.capsule-select {
+    display: flex;
+    
+    .item {
+        border-style: solid;
+        border-color: var(--color-bg-lighter);
+        color: var(--color-text-disabled);
+        font-weight: 500;
+        &.selected {
+            background-color: var(--color-bg-lighter);
+            border-color: var(--color-bg-x-light);
+            color: var(--color-text);
+            @include helpers.hoverGlow(1px);
+        }
+
+        &:not(.selected):hover {
+            background-color: adjust-color(
+                $color: $color-bg-light,
+                $lightness: 3%
+            );
+        }
+        padding: 0.5rem 1.2rem;
+        cursor: pointer;
+        &:not(:last-child) {
+            border-right-width: 1px !important;
+        }
+        &:not(:first-child) {
+            border-left-width: 1px !important;
+        }
+
+        &:not(:first-child):not(:last-child) {
+            border-top-width: 2px;
+            border-bottom-width: 2px;
+        }
+
+        &:first-child {
+            border-radius: 0.5rem 0 0 0.5rem;
+            border-width: 2px 0 2px 2px;
+        }
+
+        &:last-child {
+            border-radius: 0 0.5rem 0.5rem 0;
+            border-width: 2px 2px 2px 0;
+
+        }
+    }
+}
+
+.generic-btn {
+    @include helpers.hoverGlow(1px);
+    font-size: 1rem;
+    background-color: var(--color-bg-lighter);
+    border: 2px solid var(--color-bg-x-light);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    &:hover {
+        background-color: adjust-color(
+            $color: $color-bg-lighter,
+            $lightness: 3%
+        );
+    }
+}

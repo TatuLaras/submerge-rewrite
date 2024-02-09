@@ -18,26 +18,20 @@ function _interopNamespaceDefault(e) {
   return Object.freeze(n);
 }
 const path__namespace = /* @__PURE__ */ _interopNamespaceDefault(path);
-let mainWindow;
-async function handleFileOpen() {
-  const { canceled, filePaths } = await electron.dialog.showOpenDialog({});
-  if (!canceled) {
-    return filePaths[0];
-  }
-}
+let mainWindow = null;
 function createWindow() {
   mainWindow = new electron.BrowserWindow({
     frame: false,
     webPreferences: {
-      preload: path__namespace.join(__dirname, "../preload/preload.js"),
-      webSecurity: false
-    }
+      preload: path__namespace.join(__dirname, "../preload/preload.js")
+    },
+    minHeight: 600,
+    minWidth: 800
   });
   mainWindow.loadURL("http://localhost:5173");
   mainWindow.on("closed", () => mainWindow = null);
 }
 electron.app.whenReady().then(() => {
-  electron.ipcMain.handle("dialog:openFile", handleFileOpen);
   createWindow();
 });
 electron.app.on("window-all-closed", () => {
@@ -50,6 +44,12 @@ electron.app.on("activate", () => {
 });
 electron.ipcMain.on("close", () => {
   closeApp();
+});
+electron.ipcMain.on("minimize", () => {
+  mainWindow?.minimize();
+});
+electron.ipcMain.on("maximize", () => {
+  mainWindow?.isMaximized() ? mainWindow?.unmaximize() : mainWindow?.maximize();
 });
 function closeApp() {
   if (process.platform !== "darwin")
