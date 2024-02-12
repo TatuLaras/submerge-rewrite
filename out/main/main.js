@@ -25,8 +25,8 @@ function createWindow() {
     webPreferences: {
       preload: path__namespace.join(__dirname, "../preload/preload.js")
     },
-    minHeight: 600,
-    minWidth: 800
+    minHeight: 700,
+    minWidth: 1e3
   });
   mainWindow.loadURL("http://localhost:5173");
   mainWindow.on("closed", () => mainWindow = null);

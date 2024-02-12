@@ -2,16 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import WindowDecoration from './partials/WindowDecoration';
+import Dashboard from './pages/Dashboard';
+import DataView from './pages/DataView';
+import Settings from './pages/Settings';
 
 import {
     Outlet,
     RouterProvider,
-    Link,
     createRouter,
     createRoute,
     createRootRoute,
 } from '@tanstack/react-router';
 import LeftPanel from './partials/LeftPanel';
+import RightPanel from './partials/RightPanel';
 
 const rootRoute = createRootRoute({
     component: () => (
@@ -23,6 +26,7 @@ const rootRoute = createRootRoute({
                     <div className='global-layout route-content'>
                         <Outlet />
                     </div>
+                    <RightPanel />
                 </div>
             </div>
         </div>
@@ -32,30 +36,26 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: '/',
-    component: function Index() {
-        return (
-            <div className='p-2'>
-                <h3>
-                    Welcome Home! <Link to='/about'>About</Link>
-                </h3>
-            </div>
-        );
-    },
+    component: () => <Dashboard />,
 });
 
-const aboutRoute = createRoute({
+const dataViewRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: '/about',
-    component: function About() {
-        return (
-            <div className='p-2'>
-                Hello from About! <Link to='/'>Home</Link>
-            </div>
-        );
-    },
+    path: '/dataview',
+    component: () => <DataView />,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, aboutRoute]);
+const settingsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/settings',
+    component: () => <Settings />,
+});
+
+const routeTree = rootRoute.addChildren([
+    indexRoute,
+    dataViewRoute,
+    settingsRoute,
+]);
 
 const router = createRouter({ routeTree });
 

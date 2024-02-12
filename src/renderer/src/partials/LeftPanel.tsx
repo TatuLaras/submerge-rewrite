@@ -11,13 +11,13 @@ export default function LeftPanel() {
                     </div>
                     <div className='text'>Dashboard</div>
                 </Link>
-                <Link className='menu-item' to='/'>
+                <Link className='menu-item' to='/dataview'>
                     <div className='icon'>
                         <i className='fa-solid fa-table'></i>
                     </div>
                     <div className='text'>Data view</div>
                 </Link>
-                <Link className='menu-item' to='/'>
+                <Link className='menu-item' to='/settings'>
                     <div className='icon'>
                         <i className='fa-solid fa-gear'></i>
                     </div>

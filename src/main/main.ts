@@ -9,8 +9,8 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, '../preload/preload.js'),
         },
-        minHeight: 600,
-        minWidth: 800,
+        minHeight: 700,
+        minWidth: 1000,
     });
 
     // Vite DEV server URL
